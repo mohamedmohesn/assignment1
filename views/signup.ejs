@@ -1,0 +1,90 @@
+<%- include('header'); -%>
+
+<form action="/signup">
+ 
+    <h2>Sign up</h2>
+    <label for="email">Email</label>
+    <input type="text" name="email" required />
+    <div class="email error"></div>
+    <label for="password">Password</label>
+    <input type="password" name="password" required />
+    <div class="password error"></div>
+    <label for="username">username</label>
+    <input type="text" name="username" required />
+    <div class="username error"></div>
+    <label for="phone_number">phone_number</label>
+    <input type="text" name="phone_number" required />
+    <div class="phone_number error"></div>
+    <label for="facebook_account_url">facebook_account_url</label>
+    <input type="text" name="facebook_account_url" required />
+    <div class="facebook_account_url error"></div>
+    <label for="twitter_account_url">twitter_account_url</label>
+    <input type="text" name="twitter_account_url" required />
+    <div class="twitter_account_url error"></div>
+    <label for="instagram_account_url">instagram_account_url</label>
+    <input type="text" name="instagram_account_url" required />
+    <div class="instagram_account_url error"></div>
+    <button>Sign up</button>
+    <a href="/login" class=" btn btn btn-outline-primary" style="margin-left: 3.5cm;">Log in</a>
+    
+  </form>
+
+<%- include('footer'); -%>
+
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+    const usernameError = document.querySelector('.username.error');
+    const phone_numberError = document.querySelector('.phone_number.error');
+    const facebook_account_urlError = document.querySelector('.facebook_account_url.error');
+    const twitter_account_urlError = document.querySelector('.twitter_account_url.error');
+    const instagram_account_urlError = document.querySelector('.instagram_account_url.error');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      // reset errors
+      emailError.textContent = '';
+      passwordError.textContent = '';
+      usernameError.textContent = '';
+      phone_numberError.textContent = '';
+      facebook_account_urlError.textContent = '';
+      twitter_account_urlError.textContent = '';
+      instagram_account_urlError.textContent = '';
+      // get values
+      const email = form.email.value;
+      const password = form.password.value;
+      const username = form.username.value;
+      const phone_number = form.phone_number.value;
+      const facebook_account_url = form.facebook_account_url.value;
+      const twitter_account_url = form.twitter_account_url.value;
+      const instagram_account_url = form.instagram_account_url.value;
+
+      try {
+        const res = await fetch('/signup', { 
+          method: 'POST', 
+          body: JSON.stringify({ email, password , username , phone_number , facebook_account_url, twitter_account_url , instagram_account_url }),
+          headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+          emailError.textContent = data.errors.email;
+          passwordError.textContent = data.errors.password;
+          usernameError.textContent = data.errors.username;
+          phone_numberError.textContent = data.errors.phone_number;
+          facebook_account_urlError.textContent = data.errors.facebook_account_url;
+          twitter_account_urlError.textContent = data.errors.twitter_account_url;
+          instagram_account_urlError.textContent = data.errors.instagram_account_url;
+        }
+        if (data.user) {
+          location.assign('/');
+        }
+  
+      }
+      catch (err) {
+        console.log(err);
+      }
+  
+    });
+  </script>

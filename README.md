@@ -1,6 +1,8 @@
 # assignment1
 to start the page:
 
+on treminal
+
 
 npm init
 

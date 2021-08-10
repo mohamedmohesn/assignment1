@@ -1,0 +1,27 @@
+<%- include('header'); -%>
+
+<form action="/update">
+ 
+    <h2>update</h2>
+    <h4 for="email">Email</h4>
+    <h5 for="email"><%= user.email %></label>
+
+    <h4 for="username">username</h4>
+    <h5 for="username"><%= user.username %></h5>
+
+    <h4 for="phone_number">phone_number</h4>
+    <h5 for="phone_number"><%= user.phone_number %></h5>
+
+    <h4 for="facebook_account_url">facebook_account_url</h4>
+    <h5 for="facebook_account_url"><%= user.facebook_account_url %></h5>
+
+    <h4 for="twitter_account_url">twitter_account_url</h4>
+    <h5 for="twitter_account_url"><%= user.twitter_account_url %></h5>
+
+    <h4 for="instagram_account_url">instagram_account_url</h4>
+    <h5 for="instagram_account_url"><%= user.instagram_account_url %></h5>
+
+    <button>update</button>
+    
+  </form>
+  <%- include('footer'); -%>

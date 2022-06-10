@@ -8,3 +8,4 @@ npm init
 
 
 npm i express bcrypt body-parser cookie-parser ejs jsonwebtoken mongoose validator url-validation nodemon
+bye
